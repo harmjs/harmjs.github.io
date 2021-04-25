@@ -6,9 +6,8 @@ import linearQuadtreeImageSrc from './images/linear_quadtree.png';
 import cellularAutomatonImageSrc from './images/cellular_automaton.png';
 import chessImageSrc from './images/chess.png';
 
-import GithubSVG from './svg/github.svg';
+import GitHubSVG from './svg/github.svg';
 import FacebookSVG from './svg/facebook.svg';
-import { GitHub } from 'react-feather';
 
 const COLORS = {
     background: ["#1E1E1E", "#252526", "#303030"],
@@ -17,7 +16,7 @@ const COLORS = {
 }
 
 const marginMaxWidth = 500 + "rem";
-const headerFooterHeight = 48 + "rem";
+const headerFooterHeight = 40 + "rem";
 
 const GlobalStyle = createGlobalStyle`
     html
@@ -31,20 +30,19 @@ const GlobalStyle = createGlobalStyle`
     }
 
 
-    @media (max-width: 900px) {
+    @media (max-width: 1200px) {
         html 
         {
             font-size: 1.8px;
         }
     } 
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
         html 
         {
             font-size: 1.6px;
         }
     } 
-
 
     body
     {
@@ -68,14 +66,14 @@ const GlobalStyle = createGlobalStyle`
     {
         padding-top: 12rem;
         margin: 0rem 6rem;
-        font-size: 36rem;
+        font-size: 32rem;
     }
 
     h2
     {
         padding-top: 24rem;
         margin: 0rem 6rem;
-        font-size: 20rem;
+        font-size: 24rem;
     }
 
     svg
@@ -356,7 +354,7 @@ const ProjectsRoute = () =>
                     </p>
                     <LinkContainer>
                         <SVGLinkBox href="https://github.com/harmjs/linear-quadtree-paint" >
-                            <GitHub />
+                            <GitHubSVG />
                         </SVGLinkBox>
                     </LinkContainer>
                 </Description>
@@ -375,7 +373,7 @@ const ProjectsRoute = () =>
                     </p>
                     <LinkContainer>
                         <SVGLinkBox href="https://github.com/harmjs/react-cellular-automata">
-                            <GitHub />
+                            <GitHubSVG />
                         </SVGLinkBox>
                     </LinkContainer>
                 </Description>
@@ -393,7 +391,7 @@ const ProjectsRoute = () =>
                     </p>
                     <LinkContainer>
                         <SVGLinkBox href="https://github.com/harmjs/react-chess" >
-                            <GitHub/>
+                            <GitHubSVG />
                         </SVGLinkBox>
                     </LinkContainer>
                 </Description>
@@ -440,23 +438,23 @@ const ContactRoute = () =>
                 <ContactForm>
                     <FormFieldFlexRow>
                         <ContactFieldSmall>
-                            <FieldLabel for="name">Name</FieldLabel>
+                            <FieldLabel htmlFor="name">Name</FieldLabel>
 							<FieldInput id="name" placeholder="Andrew Ryan "/>
                         </ContactFieldSmall>
                         <ContactFieldMedium>
-                            <FieldLabel for="email">Email Address</FieldLabel>
+                            <FieldLabel htmlFor="email">Email Address</FieldLabel>
                             <FieldInput id="email" placeholder="whoisandrewryan@gmail.com "/>
                         </ContactFieldMedium>
                     </FormFieldFlexRow>
                     <ContactField>
-                        <FieldLabel for="subject">Subject</FieldLabel>
+                        <FieldLabel htmlFor="subject">Subject</FieldLabel>
                         <FieldInput 
                             id="subject" 
                             placeholder="Invitation to join a highly secretive project" 
                         />
                     </ContactField>
                     <ContactField>
-                        <FieldLabel for="message">Message</FieldLabel>
+                        <FieldLabel htmlFor="message">Message</FieldLabel>
                         <TextBoxInput 
                             id="message" 
                             placeholder="Dear Jacob,&#013;&#013;I was deeply impressed reading your web developer portfolio. Do you have any experience with steam powered logic gates?&#013;&#013;Regards,&#013;Andrew Ryan"
@@ -486,87 +484,69 @@ const NotFoundRoute = () =>
 
 
 const ROUTER = new Map([
-    ['/', HomeRoute],
-    ['/projects', ProjectsRoute],
-    ['/about', AboutRoute],
-    ['/contact', ContactRoute],
-    [null, NotFoundRoute]
+    ['', HomeRoute],
+    ['#/projects', ProjectsRoute],
+    ['#/about', AboutRoute],
+    ['#/contact', ContactRoute],
+    ['#/404', NotFoundRoute]
 ]);
 
-/*
-const resolveRouteName = () =>
+const getRouteComponent = (routeHash) => 
 {
-    const routeName = window.location.pathname;
-    if (ROUTER.has(routeName)) return routeName;
-    return null;
+    if (ROUTER.has(routeHash)) return ROUTER.get(routeHash);
+    return NotFoundRoute;
 }
-*/
 
 const App = () =>
 {
-    const [routeName, setRouteName] = useState('/');
+    const [ActiveRouteComponent, setActiveRouteComponent] = 
+        useState(() => getRouteComponent(window.location.hash));
 
-    /*
+    const setLocationHash = (routeHash) => window.location.hash = routeHash;
+
     useEffect(() =>
     {
-        const setPageRoute = () =>
-        {
-            const nextRouteName = resolveRouteName();
-            setRouteName(nextRouteName);
-        }
+        const onLocationHashChange = () => {
+            setActiveRouteComponent(() => getRouteComponent(window.location.hash));
+        };
 
-        window.addEventListener('onpopstate', setPageRoute);
-        return () => window.removeEventListener('onpopstate', setPageRoute)
+        window.addEventListener('hashchange', onLocationHashChange);
+        return () => window.removeEventListener('hashchange', onLocationHashChange);
     })
-    */
-
-    const RouteComponent = ROUTER.get(routeName);
-
-    /*
-
-    */
-
-    const changeRoute = (nextRouteName) => 
-    {
-        window.history.pushState('', '', nextRouteName);
-        setRouteName(nextRouteName);
-    }
-
-
 
     return (
         <>
             <GlobalStyle />
             <HeaderSection role="navigation">
                 <Link 
-                    isActive={routeName === "/"} 
-                    onClick={() => changeRoute("/")}
+                    isActive={ActiveRouteComponent === HomeRoute} 
+                    onClick={() => setLocationHash("")}
                 >
                     Home
                 </Link>
                 <TakeSpace></TakeSpace>
                 <Link 
-                    isActive={routeName === "/projects"} 
-                    onClick={() => changeRoute("/projects")}
+                    isActive={ActiveRouteComponent === ProjectsRoute} 
+                    onClick={() => setLocationHash("/projects")}
                 >
                     Projects
                 </Link>
                 <Link 
-                    isActive={routeName === "/about"} 
-                    onClick={() => changeRoute("/about")}
+                    isActive={ActiveRouteComponent === AboutRoute} 
+                    onClick={() => setLocationHash("/about")}
                 >
                     About Me
                 </Link>
                 <Link 
-                    isActive={routeName === "/contact"} 
-                    onClick={() => changeRoute("/contact")}
+                    isActive={ActiveRouteComponent === ContactRoute} 
+                    onClick={() => setLocationHash("/contact")}
                 >
                     Contact
                 </Link>
             </HeaderSection>
             <ScrollableSection>
                 <Scrollable>
-                    <RouteComponent />
+                    <ActiveRouteComponent />
                     <TakeSpaceFooter></TakeSpaceFooter>
                     <Footer>
                         <SVGLinkBox
@@ -577,7 +557,7 @@ const App = () =>
                         <SVGLinkBox
                             href={"https://github.com/harmjs"}
                         >
-                            <GithubSVG  />
+                            <GitHubSVG  />
                         </SVGLinkBox>
                         <FooterText>
                             Jacob Sloots <br/>
