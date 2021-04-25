@@ -478,7 +478,7 @@ const NotFoundRoute = () =>
         <h1>Page Not Found</h1>
         <RowSection>
             <Description>
-                We are sorry, but we couldn't find the page you were looking for.
+                <p>We are sorry, but we couldn't find the page you were looking for.</p>
             </Description>
         </RowSection>
     </ContentMargin>
@@ -493,17 +493,20 @@ const ROUTER = new Map([
     [null, NotFoundRoute]
 ]);
 
+/*
 const resolveRouteName = () =>
 {
     const routeName = window.location.pathname;
     if (ROUTER.has(routeName)) return routeName;
     return null;
 }
+*/
 
 const App = () =>
 {
-    const [routeName, setRouteName] = useState(resolveRouteName());
+    const [routeName, setRouteName] = useState('/');
 
+    /*
     useEffect(() =>
     {
         const setPageRoute = () =>
@@ -515,14 +518,21 @@ const App = () =>
         window.addEventListener('onpopstate', setPageRoute);
         return () => window.removeEventListener('onpopstate', setPageRoute)
     })
+    */
 
     const RouteComponent = ROUTER.get(routeName);
+
+    /*
+
+    */
 
     const changeRoute = (nextRouteName) => 
     {
         window.history.pushState('', '', nextRouteName);
         setRouteName(nextRouteName);
     }
+
+
 
     return (
         <>
