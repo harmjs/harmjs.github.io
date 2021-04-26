@@ -8,41 +8,28 @@ import chessImageSrc from './images/chess.png';
 
 import GitHubSVG from './svg/github.svg';
 import FacebookSVG from './svg/facebook.svg';
+import LinkSVG from './svg/link.svg';
+import { Facebook } from 'react-feather';
 
 const COLORS = {
-    background: ["#1E1E1E", "#252526", "#303030"],
-	foreground: ["#FFFFFF", "#E5E5E5", "#B4B4B4", "#8C8C8C"],
+    background: ["#1B1B1B", "#262626", "#3B3B3B"],
+	foreground: ["#FFFFFF", "#E5E5E5", "#B4B4B4", "#838383"],
 	active: ["#FFAA00"]
 }
 
-const marginMaxWidth = 500 + "rem";
-const headerFooterHeight = 40 + "rem";
+const marginMaxWidth = 600 + "rem";
+const headerFooterHeight = 36 + "rem";
 
 const GlobalStyle = createGlobalStyle`
     html
     {
-        font-size: 2px;
-        font-family: 'Roboto', sans-serif;
+        font-size: 1.6px;
         color: ${COLORS.foreground[1]};
         margin: 0px;
         padding: 0px;
         overflow: hidden;
+        font-family: 'Open Sans', sans-serif;
     }
-
-
-    @media (max-width: 1200px) {
-        html 
-        {
-            font-size: 1.8px;
-        }
-    } 
-
-    @media (max-width: 900px) {
-        html 
-        {
-            font-size: 1.6px;
-        }
-    } 
 
     body
     {
@@ -60,20 +47,24 @@ const GlobalStyle = createGlobalStyle`
 		margin: 0rem;
         font-size: 10rem;
         color: ${COLORS.foreground[1]};
+        font-family: 'Open Sans', sans-serif;
     }
 
     h1
     {
-        padding-top: 12rem;
+        font-family: 'Roboto', sans-serif;
+        padding-top: 6rem;
         margin: 0rem 6rem;
-        font-size: 32rem;
+        font-size: 30rem;
     }
 
     h2
     {
-        padding-top: 24rem;
+        font-family: 'Open Sans', sans-serif;
+        padding-top: 30rem;
         margin: 0rem 6rem;
-        font-size: 24rem;
+        font-size: 16rem;
+        padding-bottom: 6rem;
     }
 
     svg
@@ -98,10 +89,10 @@ const HeaderSection = styled.header`
 
 const Link = styled.a`
     cursor: pointer;
-    font-size: 12rem;
-    padding: 4rem 8rem;
+    font-size: 11rem;
+    padding: 4rem 6rem;
 
-    color: ${({ isActive }) => COLORS.foreground[isActive ? 2 : 1]};
+    color: ${({ isActive }) => COLORS.foreground[isActive ? 3 : 1]};
 
     :hover 
     {
@@ -116,7 +107,7 @@ const TakeSpace = styled.div`
 `;
 
 const TakeSpaceFooter = styled(TakeSpace)`
-    padding-top: 24rem;
+    padding-top: 30rem;
 `;
 
 const ScrollableSection = styled.div`
@@ -151,33 +142,33 @@ const Footer = styled.div`
     flex: 0 0 ${headerFooterHeight};
     box-sizing: border-box;
     background-color: ${COLORS.background[0]};
+    padding: 3rem;
 `;
 
 const RowSection = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap-reverse;
-    padding-top: 6rem;
 `;
 
 const ColumnSection = styled.div`
     display: flex;
     flex-direction: column;
-    padding-top: 6rem;
 `;
 
 const Block = styled.div`
+    margin-top: 30rem;
     display: flex;
     flex-direction: column;
     background-color: ${COLORS.background[2]};
-    padding: 24rem;
+    padding: 12rem;
 `;
 
 const Description = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 2 2 300rem;
-    padding: 24rem;
+    flex: 2 2 240rem;
+    padding: 12rem;
     background-color: ${COLORS.background[2]};
     justify-content: space-between;
 `;
@@ -188,15 +179,15 @@ const LinkContainer = styled.div`
 `;
 
 const PhotoContainer = styled.div`
-    flex: 1 1 150rem;
+    flex: 1 1 120rem;
     box-sizing: border-box;
-    padding: 24rem;
+    padding: 12rem;
     background-color: ${COLORS.background[0]};
 `;
 
 const Photo = styled.img`
+    max-width: 180rem;
     width: 100%;
-    max-width: 150rem;
     &:after
     {
         display: block;
@@ -208,13 +199,13 @@ const Photo = styled.img`
 const SVGLinkBox = styled.a`
     display: block;
     box-sizing: border-box;
-    height: 24rem;
-    width:  24rem;
+    height: 28rem;
+    width:  28rem;
+    padding: 2rem;
 
-    margin: 0rem 1.5rem;
+    margin: 0rem 3rem;
 
-    border: 1px solid ${COLORS.foreground[2]};
-    border-radius: 25%;
+    border: 1rem solid ${COLORS.foreground[2]};
 
    color: ${COLORS.foreground[2]};
 
@@ -227,8 +218,8 @@ const SVGLinkBox = styled.a`
 `;
 
 const FooterText = styled.div`
-    margin: 0rem 4.5rem;
-    font-size: 8rem;
+    margin: 0rem 6rem;
+    font-size: 9rem;
     color: ${COLORS.foreground[1]};
 `;
 
@@ -236,15 +227,15 @@ const FooterText = styled.div`
 const ContactForm = styled.form`
     display: flex;
     flex-direction: column;
-    margin: 18rem 18rem;
+    margin: 24rem 6rem;
+    margin-bottom: 0rem;
 `;
 
 const ContactField = styled.div`
     margin: 6rem 6rem;
     display: flex;
     flex-direction: column;
-    padding: 8rem;
-    border-radius: 8rem;
+    padding: 6rem;
 	overflow:auto;
 	
 	background-color: ${COLORS.background[2]};
@@ -302,14 +293,14 @@ const TextBoxInput = styled.textarea`
 
 const SubmitButton = styled.button`
     box-sizing: border-box;
-	margin: 18rem 6rem;
+	margin: 6rem;
 	margin-bottom: 0rem;
 	font-family: 'Roboto', sans-serif;
-	padding: 8rem;
+	padding: 6rem;
 	background-color: ${COLORS.background[2]};
 	border: 1px solid ${COLORS.foreground[2]};
 	color: ${COLORS.foreground[2]};
-	font-size: 10rem;
+	font-size: 11rem;
 	
 	cursor: pointer;
 
@@ -320,6 +311,13 @@ const SubmitButton = styled.button`
     }
 `;
 
+const SVGButton = ({ href, title, SVGElement }) =>
+(
+    <SVGLinkBox href={href} title={title}>
+        <SVGElement />
+    </SVGLinkBox>
+);
+
 
 const HomeRoute = () => (
     <ContentMargin>
@@ -328,7 +326,7 @@ const HomeRoute = () => (
         <RowSection>
             <Description>
                 <p>
-                    Welcome to my portfolio! <br /><br /> 
+                    Welcome to my portfolio!<br /><br /> 
                     I'm a self-taught web developer from Hamilton Ontario.
                 </p>
             </Description>
@@ -349,13 +347,20 @@ const ProjectsRoute = () =>
                 <Description>
                     <p>
                         December 2020 <br/><br/>
-                        I decided to spice up a MS Paint app by using a linear quadtree to store the pixel data. I added a button which renders the quadtree divisions as you draw, and the effect is pretty neat.<br/><br/>
-                        While it may seem contradictory, I've found I like writing mutable models that are used privately by immutable controllers, as its a division which plays to the strengths of either paradigm.
+                        I decided to spice up a React MS Paint app by using a linear quadtree to store the pixel data. I added a button which renders the quadtree divisions as you draw, and I think the effect is pretty neat.<br/><br/>
+                        For the apps relatively complex state, I used a controller with both public immutable properties which can be passed as React props, and private mutable properties for internal state.
                     </p>
                     <LinkContainer>
-                        <SVGLinkBox href="https://github.com/harmjs/linear-quadtree-paint" >
-                            <GitHubSVG />
-                        </SVGLinkBox>
+                        <SVGButton 
+                            href="https://github.com/harmjs/linear-quadtree-paint"
+                            title="Link to GitHub repository"
+                            SVGElement={GitHubSVG}
+                        />
+                        <SVGButton 
+                            href="./linear-quadtree-paint"
+                            title="Link to live website"
+                            SVGElement={LinkSVG}
+                        />
                     </LinkContainer>
                 </Description>
                 <PhotoContainer>
@@ -367,14 +372,15 @@ const ProjectsRoute = () =>
                 <Description>
                     <p>
                         June 2020 <br/><br/>
-                        For most of history reductionism has been the dominant paradigm of scientific investigation. Microscopes are used to zoom in and understand something from the bottom up. Computer simulations represent a new type of thought, acting as macroscropes, applying rules recurisively, allow for the study of potentially complex emergent behaviours. <br/><br/>
-                        In this project, I made what I thought was a simple interface to synthesize different 2D totalistic cellular automata, on a variety of different grids. However, I didn't anticipate how hard the UI/UX design would be. <br/><br/>
-                        I still learned a ton. I'm particularly proud of how I mapped different lattice spaces onto each other. Since, I spend more time planning layouts, and have found cleaner ways of incorporating responsive canvas elements.
+                        In this project, I made what I thought was a simple interface to synthesize different 2D totalistic cellular automata, on a variety of different grids. However, I didn't anticipate how hard the UI/UX design would be.<br/><br/>
+                        I still learned a ton. I'm particularly proud of how I mapped different lattice spaces onto each other.
                     </p>
                     <LinkContainer>
-                        <SVGLinkBox href="https://github.com/harmjs/react-cellular-automata">
-                            <GitHubSVG />
-                        </SVGLinkBox>
+                        <SVGButton 
+                             href="https://github.com/harmjs/react-cellular-automata"
+                            title="Link to GitHub repository"
+                            SVGElement={GitHubSVG}
+                        />
                     </LinkContainer>
                 </Description>
                 <PhotoContainer>
@@ -386,13 +392,17 @@ const ProjectsRoute = () =>
                 <Description>
                     <p>
                         August 2020 <br/><br/>
-                        Like many people, I too got interested in chess during the pandemic.  So I mad a chess board which lets you play legal moves. <br/> <br/>
-                        Implementing pawn promotions, enpassent, check, castling, and stalemate turned out to be suprisingly fun. Initially I wanted to implement an engine but soon realized I was over my head. I'd like to return to that project once I get more experience with algorithms and data structures.
+                        Like many others, I took up chess during the pandemic, which inspired me to make a chess board which allows a user to make legal moves on it.<br/><br/>
+                        Implementing pawn promotions, enpassent, check, castling, and stalemate turned out to be surprisingly fun. Initially I wanted to implement an engine but soon realized I was over my head. I'd like to return to this project once after doing more research on chess algorithms and data structures.
                     </p>
                     <LinkContainer>
-                        <SVGLinkBox href="https://github.com/harmjs/react-chess" >
-                            <GitHubSVG />
-                        </SVGLinkBox>
+                    <LinkContainer>
+                        <SVGButton 
+                            href="https://github.com/harmjs/react-chess"
+                            title="Link to GitHub repository"
+                            SVGElement={GitHubSVG}
+                        />
+                    </LinkContainer>
                     </LinkContainer>
                 </Description>
                 <PhotoContainer>
@@ -407,17 +417,14 @@ const AboutRoute = () =>
 (
     <ContentMargin>
         <h1>About Me</h1>
-        <RowSection>
-            <Description>
-                <p>
-                    Hey, I'm Jacob a self-taught web developer from Hamilton Ontario.<br/><br/>
-                    I quickly realized in university that the McMaster life science program was not the place for me, but my marks were okay, so I finished out the degree. To round out my science courses, I persued an English minor and somehow wormed my way into a few fourth year English seminars, fufulling my need to write and think critically about the world.<br/><br/>
-                    After university, I decided to take some time off and teach myself coding. I can now truthfully admit that the appeal was a limit experience not a quick and pragmatic path towards a stable income. It wasn't easy, and there are many thing I might do differently knowing what I know now, but the overall journey of self-knowledge and mastery was irreplacable.<br/><br/>
-                    A longterm hobby of mine has been making music on my computer. Of late I've been fascinated with the mixing and mastering process, as it's both highly technical but also creative. It's very satisfying to comb something relatively listenable out of what was before overcomplicated noise. In general, I'm always picking up new hobbies and interests, as learning is an absolute need for me rather then a conditional.<br/><br/>
-                    Before the lockdown I become obsessed with going to the gym, tracking calories and cooking healthy foods. Initially the pandemic was quite a blow, but now I've found new things to do with my friends, like playing tennis, starting a Stardew Valley server, or watching obscure movies through discord. Recently I organized a book club, and are currently entralled working our way through The Wind-Up Bird Chronicle by Haruki Murakami. Strangely, it feels as if the pandemic has brought us closer togther.<br/><br/>
-                </p>
-            </Description>
-        </RowSection>
+        <Block>
+            <p>
+                I’m Jacob, a self-taught web developer from Hamilton Ontario, with a honours degree in life science and minor in English.<br/><br/>
+                After university, I decided to take some time off and teach myself coding. I can now truthfully admit that the appeal was for more of a limit experience then a quick and pragmatic path towards a stable income. It wasn't easy, and there are many thing I might do differently knowing what I know now, but the overall journey of self-knowledge and mastery was irreplaceable.<br/><br/>
+                A long-term hobby of mine has been making music on my computer.  Recently, I've been fascinated with the mixing and mastering process, as it's both highly technical but also creative. I’m certainly no expert, but it very satisfying to comb something relatively listenable out of overcomplicated noise.<br/><br/>
+                I'm always picking up new hobbies and interests. Before the lockdown I become obsessed with the gym, tracking calories and cooking healthy foods. Initially the pandemic was quite a blow, but now I've found new thing to do, like playing tennis, starting a Stardew Valley server, or watching weird movies with my friends through discord. I even organized a book club, and we are currently working our way through The Wind-Up Bird Chronicle by Haruki Murakami.<br/><br/>
+            </p>
+        </Block>
 
     </ContentMargin>
 );
@@ -549,16 +556,16 @@ const App = () =>
                     <ActiveRouteComponent />
                     <TakeSpaceFooter></TakeSpaceFooter>
                     <Footer>
-                        <SVGLinkBox
-                            href={"https://www.facebook.com/jsloots"}
-                        >
-                            <FacebookSVG  />
-                        </SVGLinkBox>
-                        <SVGLinkBox
-                            href={"https://github.com/harmjs"}
-                        >
-                            <GitHubSVG  />
-                        </SVGLinkBox>
+                        <SVGButton 
+                            href="https://github.com/harmjs/react-chess"
+                            title="Link to my GitHub profile"
+                            SVGElement={GitHubSVG}
+                        />
+                        <SVGButton 
+                            href="https://www.facebook.com/jsloots/"
+                            title="Link to my Facebook profile"
+                            SVGElement={FacebookSVG}
+                        />
                         <FooterText>
                             Jacob Sloots <br/>
                             2020
