@@ -24,10 +24,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "feather-icons": "^4.28.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-feather": "^2.0.9",
     "styled-components": "^5.2.3"
   },
   "author": "Jacob Sloots",

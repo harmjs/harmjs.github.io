@@ -9,7 +9,6 @@ import chessImageSrc from './images/chess.png';
 import GitHubSVG from './svg/github.svg';
 import FacebookSVG from './svg/facebook.svg';
 import LinkSVG from './svg/link.svg';
-import { Facebook } from 'react-feather';
 
 const COLORS = {
     background: ["#1B1B1B", "#262626", "#3B3B3B"],
